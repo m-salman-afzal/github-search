@@ -1,13 +1,14 @@
 import {Card, Row, Col, Skeleton, Tooltip} from "antd";
 
-import {ISetRepositories} from "../Containers/GithubSearchContainer";
 import {SEARCH_TYPES} from "../Utils/constants";
 import Image from "next/image";
+import {initialRepositories} from "@/Containers/GithubSearchContainer";
 
 interface IGithubCardComponent {
-    repositories: ISetRepositories;
+    repositories: typeof initialRepositories;
     searchType: string;
     loading: boolean;
+    bottomBoundryRef: React.MutableRefObject<null>;
 }
 
 const loadingCards = Array(3).fill(0);
@@ -15,34 +16,16 @@ const loadingCards = Array(3).fill(0);
 export const GithubCardComponent = (props: IGithubCardComponent) => {
     return (
         <>
-            {props.loading && (
+            {props.repositories.length > 0 && (
                 <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}} justify={"center"}>
-                    {loadingCards.map((_, index) => {
-                        return (
-                            <Card hoverable loading={props.loading} style={{width: 240, margin: 10}} key={index}>
-                                <Skeleton active />
-                            </Card>
-                        );
-                    })}
-                </Row>
-            )}
-
-            <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}} justify={"center"}>
-                {props.repositories.items.map(
-                    (repository: {
-                        id: number;
-                        owner?: {avatar_url: string};
-                        avatar_url?: string;
-                        description?: string;
-                        html_url: string;
-                    }) => {
+                    {props.repositories.map((repository) => {
                         return (
                             <Col className="gutter-row" key={repository.id}>
                                 <Card
                                     key={repository.id}
                                     hoverable
                                     style={{width: 240, margin: 10}}
-                                    loading={props.loading}
+                                    // loading={props.loading}
                                     cover={
                                         <Image
                                             alt="example"
@@ -74,9 +57,21 @@ export const GithubCardComponent = (props: IGithubCardComponent) => {
                                 </Card>
                             </Col>
                         );
-                    }
-                )}
-            </Row>
+                    })}
+                </Row>
+            )}
+            {props.loading && (
+                <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}} justify={"center"}>
+                    {loadingCards.map((_, index) => {
+                        return (
+                            <Card hoverable loading={props.loading} style={{width: 240, margin: 10}} key={index}>
+                                <Skeleton active />
+                            </Card>
+                        );
+                    })}
+                </Row>
+            )}
+            <div id="page-bottom-boundary" style={{height: 5}} ref={props.bottomBoundryRef}></div>
         </>
     );
 };

@@ -11,7 +11,12 @@ interface IGithubSearchComponent {
 
 const selectAfter = (props: IGithubSearchComponent) => {
     return (
-        <Select defaultActiveFirstOption={true} defaultValue={SEARCH_TYPES.USERS} onChange={props.onSearchTypeChange}>
+        <Select
+            id="search-type"
+            defaultActiveFirstOption={true}
+            defaultValue={SEARCH_TYPES.USERS}
+            onChange={props.onSearchTypeChange}
+            aria-label="search-type">
             <Option value={SEARCH_TYPES.USERS}>User</Option>
             <Option value={SEARCH_TYPES.REPOSITORIES}>Repo</Option>
         </Select>
@@ -25,6 +30,7 @@ export const GithubSearchComponent = (props: IGithubSearchComponent) => {
                 placeholder="Start typing to search..."
                 addonAfter={selectAfter(props)}
                 onChange={props.onSearchTextChange}
+                id="search-input"
             />
         </>
     );
