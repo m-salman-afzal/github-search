@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    productionBrowserSourceMaps: true,
     images: {
         remotePatterns: [
             {
@@ -30,4 +31,4 @@ const nextConfig = {
     }
 };
 
-module.exports = nextConfig;
+export default nextConfig;
