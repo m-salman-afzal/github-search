@@ -25,7 +25,6 @@ export const GithubCardComponent = (props: IGithubCardComponent) => {
                                     key={repository.id}
                                     hoverable
                                     style={{width: 240, margin: 10}}
-                                    // loading={props.loading}
                                     cover={
                                         <Image
                                             alt="example"

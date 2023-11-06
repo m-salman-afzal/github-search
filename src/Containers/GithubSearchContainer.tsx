@@ -23,41 +23,44 @@ export const GithubSearchContainer = () => {
     const [page, setPage] = useState(1);
     const bottomBoundryRef = useRef(null);
 
-    const getData = async (searchText: string, searchType: string, currentPage: number) => {
-        if (searchText.length === 0) {
-            setRepositories(initialRepositories);
-            setPage(1);
+    useEffect(() => {
+        const getData = async (searchText: string, searchType: string, currentPage: number) => {
+            if (searchText.length === 0) {
+                setRepositories(initialRepositories);
+                setPage(1);
 
-            return;
-        }
+                return;
+            }
 
-        switch (searchType) {
-            case SEARCH_TYPES.REPOSITORIES:
-                {
-                    setLoading(true);
+            switch (searchType) {
+                case SEARCH_TYPES.REPOSITORIES:
+                    {
+                        setLoading((l) => !l);
 
-                    const {data} = await getGithubRepositories({query: searchText, currentPage: currentPage});
-                    setRepositories(repositories.concat(data.items as any));
+                        const data = await getGithubRepositories({query: searchText, currentPage: currentPage});
+                        setRepositories((r) => r.concat(data.items as any));
 
-                    setLoading(false);
-                }
-                break;
+                        setLoading((l) => !l);
+                    }
+                    break;
 
-            case SEARCH_TYPES.USERS:
-                {
-                    setLoading(true);
+                case SEARCH_TYPES.USERS:
+                    {
+                        setLoading((l) => !l);
 
-                    const {data} = await getGithubUsers({query: searchText, currentPage: page});
-                    setRepositories(repositories.concat(data.items as any));
+                        const data = await getGithubUsers({query: searchText, currentPage: page});
+                        setRepositories((r) => r.concat(data.items as any));
 
-                    setLoading(false);
-                }
-                break;
+                        setLoading((l) => !l);
+                    }
+                    break;
 
-            default:
-                break;
-        }
-    };
+                default:
+                    break;
+            }
+        };
+        searchText && searchType && getData(searchText, searchType, page);
+    }, [searchText, searchType, page]);
 
     const handleInputChange = async (searchText: string) => {
         if (searchText.length <= 3 || searchText.length === 0) {
@@ -93,11 +96,7 @@ export const GithubSearchContainer = () => {
         }
     };
 
-    useEffect(() => {
-        searchText && searchType && getData(searchText, searchType, page);
-    }, [page, searchText, searchType]);
-
-    useInfiniteScroll(onIntersection, bottomBoundryRef, [page]);
+    useInfiniteScroll(onIntersection, bottomBoundryRef);
 
     return (
         <>

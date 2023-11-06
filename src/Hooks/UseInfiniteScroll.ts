@@ -2,9 +2,7 @@ import {useEffect} from "react";
 
 export const useInfiniteScroll = (
     onIntersectionCallback: (entries: unknown[]) => void,
-    bottomBoundryRef: React.MutableRefObject<null>,
-    // entries: any,
-    dependencies: unknown[]
+    bottomBoundryRef: React.MutableRefObject<null>
 ) => {
     useEffect(() => {
         const observer = new IntersectionObserver(onIntersectionCallback);
