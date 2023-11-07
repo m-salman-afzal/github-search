@@ -6,9 +6,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
-        "predeploy": "next build",
-        "deploy": "gh-pages -d .next"
+        "lint": "next lint"
     },
     "dependencies": {
         "antd": "^5.11.0",
@@ -30,7 +28,6 @@
         "eslint-plugin-prettier": "^5.0.1",
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-refresh": "^0.4.4",
-        "gh-pages": "^6.0.0",
         "prettier": "^3.0.3",
         "typescript": "^5"
     }
