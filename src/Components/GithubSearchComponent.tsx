@@ -1,3 +1,5 @@
+// import styles from "@/styles/searchBar.module.css";
+
 import {Input, Select} from "antd";
 
 import {SEARCH_TYPES} from "../Utils/constants";
@@ -25,13 +27,37 @@ const selectAfter = (props: IGithubSearchComponent) => {
 
 export const GithubSearchComponent = (props: IGithubSearchComponent) => {
     return (
-        <>
-            <Input
-                placeholder="Start typing to search..."
-                addonAfter={selectAfter(props)}
-                onChange={props.onSearchTextChange}
-                id="search-input"
-            />
-        </>
+        <Input
+            placeholder="Start typing to search..."
+            addonAfter={selectAfter(props)}
+            onChange={props.onSearchTextChange}
+            id="search-input"
+        />
     );
 };
+
+// export const GithubSearchComponent = (props: IGithubSearchComponent) => {
+//     return (
+//         <div
+//             // className={styles.mainBox}
+//             // style={{
+//             //     height: "50vh",
+//             //     display: "flex",
+//             //     alignItems: "center",
+//             //     justifyContent: "center",
+//             //     transition: "all linear 1s"
+//             // }}
+//         >
+//             <div className={styles.boxElement}>
+//                 <Input
+//                     placeholder="Start typing to search..."
+//                     addonAfter={selectAfter(props)}
+//                     onChange={props.onSearchTextChange}
+//                     id="search-input"
+//                     style={{width: "50%"}}
+//                     // className="search-input"
+//                 />
+//             </div>
+//         </div>
+//     );
+// };

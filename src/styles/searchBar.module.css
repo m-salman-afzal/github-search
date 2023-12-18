@@ -1,0 +1,34 @@
+.mainBox {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all linear 0.5s;
+    background-color: red;
+    /* padding: 0px; */
+    /* margin: 0%; */
+    /* border-radius: 1px; */
+    /* border-color: yellow; */
+    /* overflow: hidden; */
+    /* position: relative; */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* z-index: 1; */
+}
+
+.boxElement:hover {
+    background-color: yellow;
+    padding: 0px;
+    margin: 0%;
+    border-radius: 1px;
+    border-color: yellow;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.search1:hover {
+    transform: translateY(-40%);
+}
